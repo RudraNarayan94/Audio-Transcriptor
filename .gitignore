@@ -1,0 +1,34 @@
+# Django
+*.pyc
+__pycache__/
+db.sqlite3
+*.sqlite3
+
+# Media and static files
+/media/
+staticfiles/
+static/
+
+# Environment
+.env
+*.env
+venv/
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Migrations
+*/migrations/*.pyc
+*/migrations/__pycache__/
+*/migrations/*.pyo
+
+# Node modules (if using frontend tools)
+node_modules/
