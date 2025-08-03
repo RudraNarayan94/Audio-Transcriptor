@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Upload Audio - Audio Transcriber{% endblock %}
+
+{% block content %}
+<h1>Upload Audio for Transcription</h1>
+<p style="text-align: center; margin-bottom: 25px; color: #555;">
+  Please select an audio file (.mp3 or .wav) to transcribe.
+</p>
+
+<form method="post" enctype="multipart/form-data" style="margin-top: 20px;">
+  {% csrf_token %}
+
+  <div style="margin-bottom: 15px;">
+    <label for="{{ form.audio_file.id_for_label }}" style="display: block; margin-bottom: 8px; font-weight: bold;">
+      {{ form.audio_file.label }}
+    </label>
+    <input type="file" name="{{ form.audio_file.name }}" id="{{ form.audio_file.id_for_label }}" accept=".mp3,.wav"
+      required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+    {% if form.audio_file.help_text %}
+    <p style="font-size: 0.9em; color: #666; margin-top: 5px;">{{ form.audio_file.help_text }}</p>
+    {% endif %}
+    {% if form.audio_file.errors %}
+    <ul style="color: red; list-style-type: none; padding: 0; margin-top: 5px;">
+      {% for error in form.audio_file.errors %}
+      <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <label for="{{ form.file_type.id_for_label }}" style="display: block; margin-bottom: 8px; font-weight: bold;">
+      {{ form.file_type.label }}
+    </label>
+    <select name="{{ form.file_type.name }}" id="{{ form.file_type.id_for_label }}"
+      style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+      {% for value, text in form.file_type.field.choices %}
+      <option value="{{ value }}">{{ text }}</option>
+      {% endfor %}
+    </select>
+    {% if form.file_type.errors %}
+    <ul style="color: red; list-style-type: none; padding: 0; margin-top: 5px;">
+      {% for error in form.file_type.errors %}
+      <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+
+  <button type="submit"
+    style="width: 100%; padding: 12px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; transition: background-color 0.3s ease;">
+    Transcribe Audio
+  </button>
+</form>
+{% endblock %}
